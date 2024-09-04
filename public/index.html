@@ -10,11 +10,11 @@
     <script src="./../songs.json"></script>
     <title>Audio Player</title>
 </head>
-<body x-data="audioPlayer()" x-init="fetchSongs()" class="h-screen">
+<body x-data="audioPlayer()" x-init="fetchSongs(), init()" class="h-screen">
     <main class="flex flex-col justify-between gap-6 h-full">
         <ul class="flex flex-col gap-4 p-4 max-w-2xl bg-white sm:container shadow-lg overflow-y-auto h-fit">
-            <template x-for="song in songs">
-                <li class="flex flex-row gap-3 group cursor-pointer" @click="setSong(song)">
+            <template x-for="(song, index) in songs" :key="index">
+                <li class="flex flex-row gap-3 group cursor-pointer" :id="`song-${index}`" @click="setSong(index), isPlaying = true">
                     <div class="flex items-center justify-center relative aspect-square h-16 w-16">
                         <div class="text-white bg-pink-500 p-3 rounded-full absolute hidden group-hover:block transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
@@ -36,31 +36,34 @@
         </ul>
         <div class="relative sm:container min-h-64 sm:min-h-60 md:min-h-80 shadow-lg rounded-t-md bg-white px-3 sm:px-auto">
             <div class="flex flex-row gap-3 sm:gap-8">
-                <img :src="`./${activesong.cover}`" class="aspect-square hidden sm:block w-44 h-44 md:h-64 md:w-64 -ml-3 sm:-ml-8 rounded-md">
+                <img :src="`./${songs[currentIndex].cover}`" class="aspect-square hidden sm:block w-44 h-44 md:h-64 md:w-64 -ml-3 sm:-ml-8 rounded-md">
                 <div class="flex flex-col justify-around w-full">
                     <div class="flex flex-row gap-8 pt-6 sm:pt-0 justify-between items-center w-full">
                         <div>
-                            <h2 class="font-semibold text-gray-800 text-3xl" x-text="activesong.title"></h2>
-                            <p class="text-gray-400" x-text="activesong.artist"></p>
+                            <h2 class="font-semibold text-gray-800 text-3xl" x-text="songs[currentIndex].title"></h2>
+                            <p class="text-gray-400" x-text="songs[currentIndex].artist"></p>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-suit-heart-fill text-pink-500" viewBox="0 0 16 16">
                             <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
                         </svg>
                     </div>
                     <div class="flex flex-row justify-around items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-shuffle size-6 md:size-11" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-shuffle size-6 md:size-11" viewBox="0 0 16 16" >
                             <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.6 9.6 0 0 0 7.556 8a9.6 9.6 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.6 10.6 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.6 9.6 0 0 0 6.444 8a9.6 9.6 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5"/>
                             <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192"/>
                         </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-bar-left size-6 md:size-11" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-bar-left size-6 md:size-11" viewBox="0 0 16 16" @click="currentIndex--, isPlaying = true" :disabled="currentIndex === 0">
                             <path fill-rule="evenodd" d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0M4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5"/>
                         </svg>
-                        <div class="bg-pink-500 rounded-full p-6 text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pause size-6 md:size-11" viewBox="0 0 16 16">
+                        <div class="bg-pink-500 rounded-full p-6 text-white" @click="isPlaying = !isPlaying" x-cloak>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pause size-6 md:size-11" viewBox="0 0 16 16" x-show="isPlaying">
                                 <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5"/>
                             </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-play-fill size-6 md:size-11" viewBox="0 0 16 16" x-show="!isPlaying">
+                                <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
+                            </svg>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-bar-right size-6 md:size-11" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-bar-right size-6 md:size-11" viewBox="0 0 16 16" @click="currentIndex++, isPlaying = true" :disabled="currentIndex === 8">
                             <path fill-rule="evenodd" d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0M11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5"/>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-repeat size-6 md:size-11" viewBox="0 0 16 16">
@@ -69,12 +72,13 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col w-full mt-3">
+            <div class="flex flex-col w-full mt-3 relative">
                 <div class="flex flex-row text-gray-400 w-full justify-between">
                     <p>0:00</p>
-                    <p x-text="activesong.duration"></p>
+                    <p x-text="songs[currentIndex].duration"></p>
                 </div>
                 <div class="w-full h-2 rounded-2xl bg-pink-200 mt-1"></div>
+                <div class="h-2 rounded-2xl bg-pink-500 absolute bottom-0" :style="`width: ${progression}%;`"></div>
             </div>
         </div>
     </main>
@@ -82,16 +86,37 @@
         function audioPlayer() {
             return {
                 songs: [],
-                activesong: {},
-                setSong(song) {
-                    this.activesong = song;
+                currentIndex: null,
+                audioEl: null,
+                isPlaying: false,
+                progression: 0,
+                currentTime: 0,
+                duration: 0,
+                init() {
+                    this.audioEl = new Audio("./audio/songs/audio1.mp3");
+                    if(this.isPlaying){
+                        this.audioEl.play();
+                    } else {
+                        this.audioEl.pause();
+                    }
+
+                    this.audioEl.addEventListener('timeupdate', () => {
+                        this.currentTime = this.audioEl.currentTime;
+                        this.duration = this.audioEl.duration;
+                        this.progression = (this.currentTime / this.duration) * 100;
+                    });
+
+                    console.log(this.audioEl);
+                },
+                setSong(index) {
+                    this.currentIndex = index;
                 },
                 fetchSongs(){
                     fetch('./../songs.json')
                     .then(response => response.json())
                     .then(data => {
-                        this.activesong = data[0];
                         this.songs = data;
+                        this.currentIndex = 0
                     })
                 }
             };

@@ -3,54 +3,63 @@
         "title": "One Of The Brightest Stars",
         "artist": "James Blunt",
         "duration": "3:12",
-        "cover": "img/songs/cover1.jpg"
+        "cover": "img/songs/cover1.jpg",
+        "src": "audio/songs/audio1.mp3"
     },
     {
         "title": "This Is The Place",
         "artist": "Red Hot Chili Pepper",
         "duration": "4:17",
-        "cover": "img/songs/cover2.jpg"
+        "cover": "img/songs/cover2.jpg",
+        "src": "audio/songs/audio2.mp3"
     },
     {
         "title": "Different Pulses",
         "artist": "Asaf Avidan",
         "duration": "4:29",
-        "cover": "img/songs/cover3.jpg"
+        "cover": "img/songs/cover3.jpg",
+        "src": "audio/songs/audio3.mp3"
     },
     {
         "title": "Devotion",
         "artist": "Beach House",
         "duration": "5:13",
-        "cover": "img/songs/cover4.jpg"
+        "cover": "img/songs/cover4.jpg",
+        "src": "audio/songs/audio4.mp3"
     },
     {
         "title": "Coucou Disco",
         "artist": "Dim Sum",
         "duration": "2:51",
-        "cover": "img/songs/cover5.jpg"
+        "cover": "img/songs/cover5.jpg",
+        "src": "audio/songs/audio5.mp3"
     },
     {
         "title": "Be Set Free",
         "artist": "Langhorne Slim",
         "duration": "3:33",
-        "cover": "img/songs/cover6.jpg"
+        "cover": "img/songs/cover6.jpg",
+        "src": "audio/songs/audio6.mp3"
     },
     {
         "title": "The Final Cut",
         "artist": "Pink Floyd",
         "duration": "5:25",
-        "cover": "img/songs/cover7.jpg"
+        "cover": "img/songs/cover7.jpg",
+        "src": "audio/songs/audio7.mp3"
     },
     {
         "title": "Purple Yellow Red and Blue",
         "artist": "Portugal. The Man",
         "duration": "4:43",
-        "cover": "img/songs/cover8.jpg"
+        "cover": "img/songs/cover8.jpg",
+        "src": "audio/songs/audio8.mp3"
     },
     {
         "title": "Le jour s'est levé",
         "artist": "Téléphone",
         "duration": "4:05",
-        "cover": "img/songs/cover9.jpg"
+        "cover": "img/songs/cover9.jpg",
+        "src": "audio/songs/audio9.mp3"
     }
 ]
