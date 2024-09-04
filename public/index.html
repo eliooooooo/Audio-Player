@@ -102,6 +102,7 @@
                     this.isPlaying = false;
                     this.audioEl = new Audio("./"+this.songs[index].src);
                     this.currentIndex = index;
+                    this.progression = 0;
                     this.currentTime = this.audioEl.currentTime;
                     this.duration = this.audioEl.duration;
                     this.remainingTime = this.formatTime(this.audioEl.duration - this.audioEl.currentTime);
