@@ -1,7 +1,12 @@
 module.exports = {
     content: ["./public/*.{html,js}"],
     theme: {
-        extend: {},
+        extend: {
+            container: {
+                center: true,
+                padding: '2rem',
+            },
+        },
         screens: {
             'xs': '320px',
             'sm': '480px',
