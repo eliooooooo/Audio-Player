@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../dist/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script src="./../songs.json"></script>
+    <title>Audio Player</title>
+</head>
+<body x-data="audioPlayer()" x-init="fetchSongs()">
+    <main class="bg-white">
+        <ul class="flex flex-col gap-4 p-4">
+            <template x-for="song in songs">
+                <li class="flex flex-row gap-3">
+                    <img :src="`./${song.cover}`" class="aspect-square h-16">
+                    <div class="flex flex-col justify-center">
+                        <h2 class="font-bold text-gray-800" x-text="song.title" ></h2>
+                        <span class="text-gray-400 flex flex-row items-center gap-2"><span x-text="song.artist" ></span><div class="rounded-md bg-gray-400 w-1.5 h-1.5"></div><span x-text="song.duration"></span></span>
+                    </div>
+                </li>
+            </template>
+        </ul>
+    </main>
+    <script>
+        function audioPlayer() {
+            return {
+                songs: [],
+                fetchSongs(){
+                    fetch('./../songs.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.songs = data;
+                    })
+                }
+            };
+        }
+    </script>
+    <script src="./../dist/main.js"></script>
+</body>
+</html>

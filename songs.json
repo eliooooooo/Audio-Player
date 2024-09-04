@@ -1,0 +1,56 @@
+[
+    {
+        "title": "One Of The Brightest Stars",
+        "artist": "James Blunt",
+        "duration": "3:12",
+        "cover": "img/songs/cover1.jpg"
+    },
+    {
+        "title": "This Is The Place",
+        "artist": "Red Hot Chili Pepper",
+        "duration": "4:17",
+        "cover": "img/songs/cover2.jpg"
+    },
+    {
+        "title": "Different Pulses",
+        "artist": "Asaf Avidan",
+        "duration": "4:29",
+        "cover": "img/songs/cover3.jpg"
+    },
+    {
+        "title": "Devotion",
+        "artist": "Beach House",
+        "duration": "5:13",
+        "cover": "img/songs/cover4.jpg"
+    },
+    {
+        "title": "Coucou Disco",
+        "artist": "Dim Sum",
+        "duration": "2:51",
+        "cover": "img/songs/cover5.jpg"
+    },
+    {
+        "title": "Be Set Free",
+        "artist": "Langhorne Slim",
+        "duration": "3:33",
+        "cover": "img/songs/cover6.jpg"
+    },
+    {
+        "title": "The Final Cut",
+        "artist": "Pink Floyd",
+        "duration": "5:25",
+        "cover": "img/songs/cover7.jpg"
+    },
+    {
+        "title": "Purple Yellow Red and Blue",
+        "artist": "Portugal. The Man",
+        "duration": "4:43",
+        "cover": "img/songs/cover8.jpg"
+    },
+    {
+        "title": "Le jour s'est levé",
+        "artist": "Téléphone",
+        "duration": "4:05",
+        "cover": "img/songs/cover9.jpg"
+    }
+]
